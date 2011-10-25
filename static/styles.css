@@ -1,0 +1,19 @@
+html, body, ul, ol, h1, h2, h3, h4, h5, h6, form, fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #222;
+    background-color: #DDD;
+    font: 0.75em/1.65 "Lucida Grande",Tahoma,Verdana,sans-serif;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0.01);
+}
+
+input[type="text"] {
+    border: 0 none;
+    border-radius: 4px 4px 4px 4px;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.4em;
+}
