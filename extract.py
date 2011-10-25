@@ -35,6 +35,10 @@ def main():
                     t = ''
                 r[j][key] = t
 
+    f = open('dict.py', 'wb')
+    f.write(pprint.pformat(r))
+    f.close()
+
     print "Extracted the following spelling tables:"
     for alphabet in r.itervalues():
         label = alphabet.pop('label')
@@ -43,10 +47,6 @@ def main():
         print "Table: ", label
         for item in ai:
             print '%s - %s' % item
-
-    f = open('dict.py', 'wb')
-    f.write(pprint.pformat(r))
-    f.close()
 
 
 
