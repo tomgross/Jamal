@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Jamal Spelling - A phonetic alphabet spelling application</title>
+    <script type="text/javascript" src="/player/audio-player.js"></script>
+    <script type="text/javascript">
+        AudioPlayer.setup("http://localhost:8080/player/player.swf", {
+            width: 290
+        });
+    </script>
+</head>
+<body>
+Spell a word:
+<form action="/spell" method="post">
+    <input name="q" type="text" />
+    <select size="1" name="dialect">
+        {% for dialect in dialects %}
+          {% ifequal dialect.0 active_dialect %}
+            <option value="{{ dialect.0 }}" selected="selected">{{ dialect.1 }}</option>
+          {% else %}
+            <option value="{{ dialect.0 }}">{{ dialect.1 }}</option>
+          {% endifequal %}
+        {% endfor %}
+    </select>
+    <input name="submit" type="submit" value="Spell" />
+</form>
+
+<ul>
+{% for word in spelling_list %}
+    <li>{{ word }}</li>
+{% endfor %}
+</ul>
+
+<p id="audioplayer_1">Alternative content</p>
+<script type="text/javascript">
+    AudioPlayer.embed("audioplayer_1", {soundFile: "{{ audio_url }}"});
+</script>
+
+</body>
+</html>
