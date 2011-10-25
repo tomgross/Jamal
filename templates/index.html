@@ -3,17 +3,22 @@
 <html>
 <head>
     <title>Jamal Spelling - A phonetic alphabet spelling application</title>
-    <script type="text/javascript" src="/player/audio-player.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+    <script type="text/javascript" src="/static/audio-player.js"></script>
     <script type="text/javascript">
-        AudioPlayer.setup("http://localhost:8080/player/player.swf", {
+        AudioPlayer.setup("/static/player.swf", {
             width: 290
         });
     </script>
 </head>
 <body>
-Spell a word:
+
 <form action="/spell" method="post">
-    <input name="q" type="text" />
+    <p>
+        <label for="q">Spell a word:</label> <input name="q" type="text" />
+    </p>
+    <p>
+    <label for="dialect">Dialect:</label>
     <select size="1" name="dialect">
         {% for dialect in dialects %}
           {% ifequal dialect.0 active_dialect %}
@@ -23,9 +28,24 @@ Spell a word:
           {% endifequal %}
         {% endfor %}
     </select>
+    </p>
+    <label for="lang">Language:</label>
+    <select size="1" name="lang">
+        {% for lang in supported_langs %}
+          {% ifequal lang.0 active_lang %}
+            <option value="{{ lang.0 }}" selected="selected">{{ lang.1 }}</option>
+          {% else %}
+            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+          {% endifequal %}
+        {% endfor %}
+    </select>
     <input name="submit" type="submit" value="Spell" />
 </form>
 
+
+{% if spelling_list %}
+<hr />
+<div id="result">
 <ul>
 {% for word in spelling_list %}
     <li>{{ word }}</li>
@@ -36,6 +56,8 @@ Spell a word:
 <script type="text/javascript">
     AudioPlayer.embed("audioplayer_1", {soundFile: "{{ audio_url }}"});
 </script>
+</div>
+{% endif %}
 
 </body>
 </html>
